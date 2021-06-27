@@ -68,7 +68,7 @@
 				$.ajax({
 					method: 'GET',
 					timeout: MAXIMUM.timeOut,
-					url: MAXIMUM.serverAddress + cardNumber,
+					url: MAXIMUM.proxyAddress + MAXIMUM.serverAddress + cardNumber,
                     headers: {
 						"Authorization": "Basic " + btoa(MAXIMUM.serverUser + ":" + MAXIMUM.serverPass),
                     },
