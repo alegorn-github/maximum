@@ -18,12 +18,15 @@ const server = http.createServer((req, res) => {
         request(requestUrl, { json: true }, (perr, pres, pbody) => {
             if (perr) { return console.log(perr); }
             
-             Object.assign(myResponse,pbody) ;
+            Object.assign(myResponse,pbody) ;
 
-             res.statusCode = 200;
-             res.setHeader('Content-Type', 'application/json');
-             res.setHeader('Access-Control-Allow-Origin','*');
-             res.end(JSON.stringify(myResponse));
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Origin','*');
+            res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+            res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+            res.end(JSON.stringify(myResponse));
         });        
     }
     else {
