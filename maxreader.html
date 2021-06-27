@@ -44,39 +44,13 @@
 	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
 	<script>
 		var MAXIMUM = {
-			serverAddress: 'http://localhost:3001/?number=',
+			serverAddress: 'http://192.168.1.163:3001/?number=',
             serverUser: 'Kabinki',
             serverPass: '12345',
-            proxyAddress: 'http://192.168.50.4/maxreader/?url=',
+            proxyAddress: 'http://localhost:3003/maxreader/?url=',
 			timeOut: 2000,
 			lockTimeOut: 5000,
 			myTimeout: null,
-			//convertHexCard: function (cardNumber) {
-			//	var firstNumber
-			//		, secondNumber
-			//		, hexNumber
-			//		, nullString = '0000'
-			//	;
-			//	if (cardNumber.length < 9) {
-			//		firstNumber = cardNumber.slice(0, 2);
-			//		firstNumber = parseInt(firstNumber, 16);
-			//		firstNumber = firstNumber.toString(10);
-			//		if (firstNumber.length < 3) {
-			//			firstNumber = nullString.slice(3 - firstNumber.length) + firstNumber;
-			//		}
-
-			//		secondNumber = cardNumber.slice(2);
-			//		secondNumber = parseInt(secondNumber, 16);
-			//		secondNumber = secondNumber.toString(10);
-
-			//		if (secondNumber.length < 5) {
-   //                     secondNumber = nullString.slice(5 - secondNumber.length) + secondNumber;
-   //                 }
-
-			//		cardNumber = firstNumber + ',' + secondNumber;
-			//	}
-			//	return cardNumber;
-			//},
 			onLoad: $(function(){
 				MAXIMUM.changeState(MAXIMUM.States.lock);
 				$('#nfc_input').focus();
@@ -88,7 +62,6 @@
 				});
 			}),
 			onCardRead: function (cardNumber) {
-				//cardNumber = MAXIMUM.convertHexCard(cardNumber);
 				MAXIMUM.showError('');
 				MAXIMUM.showNumber('');
 				MAXIMUM.changeState(MAXIMUM.States.wait);
@@ -116,11 +89,9 @@
 				,admin:{selector:'#admin_div',message:'Режим администратора'}
 			},
 			lockDownAnimation: function () {
-	//			$('#message').animate({ "fontSize": "65pt" }, 500, 'swing', MAXIMUM.lockUpAnimation);
 				$('#message').addClass('message_animating');
 			},
 			lockUpAnimation: function () {
-//				$('#message').animate({ "fontSize": "70pt" }, 500, 'swing', MAXIMUM.lockDownAnimation);
                 $('#message').removeClass('message_animating');
 			},
 			cardUpAnimation: function () {
@@ -173,10 +144,6 @@
 				else {
                     $('#error').html(message).removeClass('number_animating');
 				}
-                //$('#error').animate({ "transform": "scale(1)" }, 1000, 'swing');
-
-				//clearTimeout(MAXIMUM.myTimeout);
-    //            MAXIMUM.myTimeout = setTimeout(MAXIMUM.showError, MAXIMUM.lockTimeOut, '');
 			},
 			processResponse: function(data){
 				if (data.result = 'OK'){
