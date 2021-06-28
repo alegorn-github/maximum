@@ -7,6 +7,8 @@
     "lib": "lib"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
     "request": "^2.88.2"
   },
   "devDependencies": {},
