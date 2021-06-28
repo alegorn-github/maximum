@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
         });        
     }
     else {
-        const pathToFile = url.parse(req.url,true).path === '/'?'index.html':__dirname +  url.parse(req.url,true).path;
+        const pathToFile = url.parse(req.url,true).path === '/'?__dirname + '/index.html':__dirname +  url.parse(req.url,true).path;
         res.writeHead(200, { 'content-type': 'text/html' })
         fs.createReadStream(pathToFile).pipe(res)
     }
