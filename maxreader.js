@@ -3,8 +3,11 @@ const url = require('url');
 const request = require('request');
 const fs = require('fs');
 
-const hostname = '127.0.0.1';
+const hostname = 'localhost';
 const port = 3003;
+
+const myArgs = process.argv.slice(2);
+const serverUrlFromCLI = myArgs[0];
 
 const server = http.createServer((req, res) => {
 
@@ -14,6 +17,16 @@ const server = http.createServer((req, res) => {
     const reqUrl = new URL(req.url,baseURL);
 
     let requestUrl = reqUrl.searchParams.get('url');
+    const getServerUrlFromCLI = reqUrl.searchParams.get('cli');
+    if (getServerUrlFromCLI){
+        let paramString = '?';
+        for (const [key, value] of reqUrl.searchParams) {
+            paramString += `&${key}=${value}`;
+        }
+        requestUrl = serverUrlFromCLI + paramString;
+    }
+    
+    console.log(requestUrl);
 
     if (requestUrl){
 
