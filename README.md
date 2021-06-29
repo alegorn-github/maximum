@@ -13,7 +13,7 @@
     ```
       
 3. Прописываем автозапуск браузера:
-    Запускаем `sudo nano ~/.config/autostart/chromium.desktop` (при необходимости создать директории)
+    Запускаем `sudo nano ~/.config/autostart/chromium.desktop` (при необходимости нужно создать директории с помощью `mkdir`)
       Пишем:
       ```
       [Desktop Entry]
