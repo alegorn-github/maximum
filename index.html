@@ -87,7 +87,7 @@
 				return false;
 			},
 			States: {
-                lock: {selector: '#lock_img', message: 'Приложите карту...' }
+                lock: {selector: '#lock_img', message: 'Приложите карту..' }
 				,wait:{selector:'#wait_img',message:'Подождите...'}
 				,unlock:{selector:'#unlock_img',message:'Добро пожаловать!'}
 				,admin:{selector:'#admin_div',message:'Режим администратора'}
@@ -192,12 +192,8 @@
 <body>
 	<form>
 		<input type=text name=nfc_input id=nfc_input value='' style='z-index:-100;' /> 
-		<!--090,34166-->
 	</form>
 	<div style='position:absolute;display:block;top:0px;left:0px;background-color:black;width:1024px;height:600px;'>
-		<!--<img id=unlock_img src='unlock.gif' style='display:none;width:1024px;' alt='Открыто'>
-		<img id=wait_img src='wait.gif' style='display:none;width:1024px;' alt='Ожидание'>
-		<img id=lock_img src='lock.gif' style='width:1024px;' alt='Закрыто'>-->
 		<div id="unlock_img" style="background-color:green;display:none;width:100%;height:100%;"></div>
 		<div id="wait_img" style="background-color:black;display:none;width:100%;height:100%;"></div>
 		<div id="lock_img" style="background-color:red;width:100%;height:100%;"></div>
@@ -214,7 +210,6 @@
 			<div style='height:20px' id='cabin_template'></div>
 		</div>
 	</div>
-	<!-- <img src='logo.jpeg' style='display: absolute;margin-left: auto;margin-right: auto;width:800px;'> -->
 	
 </body>
 </html>
