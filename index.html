@@ -47,11 +47,11 @@
 	</style>
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<script>
-		var MAXIMUM = {
-			serverAddress: 'http://192.168.1.163:3001/?number=',
+		var MAXIMUM = { 
+			serverAddress: '&cli=1', // http://192.168.1.163:3001/?number=
             serverUser: 'Kabinki',
             serverPass: '12345',
-            proxyAddress: 'http://localhost:3003/maxreader/?url=',
+            proxyAddress: 'http://localhost:3003?url=',
 			timeOut: 2000,
 			lockTimeOut: 5000,
 			myTimeout: null,
@@ -72,7 +72,7 @@
 				$.ajax({
 					method: 'GET',
 					timeout: MAXIMUM.timeOut,
-					url: MAXIMUM.proxyAddress + MAXIMUM.serverAddress + cardNumber,
+					url: MAXIMUM.proxyAddress + MAXIMUM.serverAddress + '&number=' + cardNumber,
                     headers: {
 						"Authorization": "Basic " + btoa(MAXIMUM.serverUser + ":" + MAXIMUM.serverPass),
                     },
