@@ -7,9 +7,9 @@
     ```
     git -C %APP_DIR% pull &
     ```
-    Для автозапуска сервера пишем:
+    Для автозапуска сервера пишем (указываем адрес сервера, логин и пароль):
     ```
-        sudo node %APP_DIR%/maxreader.js %SERVER_1S_URL_WITH_PORT% &
+        sudo node %APP_DIR%/maxreader.js -s %SERVER_1S_URL_WITH_PORT% -u %USER_NAME% -p %USER_PASSWORD% &
     ```
       
 3. Прописываем автозапуск браузера:
