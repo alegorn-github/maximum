@@ -7,7 +7,6 @@ const commander = require('commander');
 const hostname = 'localhost';
 const port = 3003;
 
-// const argv = yargs(hideBin(process.argv)).argv
 commander.option('-s, --server <url>','Server 1S URL and port')
     .option('-u, --user <user>','Server 1S user name')
     .option('-p, --password <password>','Server 1S password')
@@ -17,8 +16,6 @@ const options = commander.opts();
 const serverUrl = options.server;
 const serverUser = options.user;
 const serverPass = options.password;
-
-console.log(serverUrl);
 
 const server = http.createServer((req, res) => {
 
