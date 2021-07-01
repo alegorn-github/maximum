@@ -2,18 +2,23 @@ const http = require('http');
 const url = require('url');
 const request = require('request');
 const fs = require('fs');
-const yargs = require('yargs/yargs')
-const { hideBin } = require('yargs/helpers')
+const commander = require('commander');
 
 const hostname = 'localhost';
 const port = 3003;
 
-const argv = yargs(hideBin(process.argv)).argv
+// const argv = yargs(hideBin(process.argv)).argv
+commander.option('-s, --server <url>','Server 1S URL and port')
+    .option('-u, --user <user>','Server 1S user name')
+    .option('-p, --password <password>','Server 1S password')
+commander.parse(process.argv);
+const options = commander.opts();
 
-const myArgs = process.argv.slice(2);
-const serverUrlFromCLI = argv.server||argv.s;
-const serverUser = argv.user||argv.u;
-const serverPass = argv.password||argv.p;
+const serverUrl = options.server;
+const serverUser = options.user;
+const serverPass = options.password;
+
+console.log(serverUrl);
 
 const server = http.createServer((req, res) => {
 
@@ -24,7 +29,7 @@ const server = http.createServer((req, res) => {
     const getServerUrlFromCLI = reqUrl.searchParams.get('cli');
     if (getServerUrlFromCLI){
         let paramString = '?' + reqUrl.searchParams.toString();
-        requestUrl = serverUrlFromCLI + paramString;
+        requestUrl = serverUrl + paramString;
     }
     
     console.log(requestUrl);
