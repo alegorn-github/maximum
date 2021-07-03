@@ -29,19 +29,24 @@ const server = http.createServer((req, res) => {
         requestUrl = serverUrl + paramString;
     }
     
-    console.log(requestUrl);
-
     if (requestUrl){
-
-        request(requestUrl, { json: true }, (perr, pres, pbody) => {
+        console.log(requestUrl);
+        request(requestUrl, { 
+            json: true,
+            auth: {
+                user: serverUser,
+                pass: serverPass,
+            }
+         }, (perr, pres, pbody) => {
             if (perr) { return console.log(perr); }
-            
+
             res.statusCode = pres.statusCode;
             if (res.statusCode < 400){
                 res.setHeader('Content-Type', 'application/json');
-                if (getServerUrlFromCLI){
-                    res.setHeader("Authorization", "Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
-                }
+                // if (getServerUrlFromCLI){
+                //     res.setHeader("Authorization", "Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
+                //     console.log("Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
+                // }
             res.end(JSON.stringify(pbody));    
             }
             else {
