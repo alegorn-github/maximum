@@ -1,4 +1,4 @@
-1. Клонируем репу в папку `%APP_DIR%` (например */home/pi/maxreader*) `git clone https://github.com/alegorn-github/maximum.git`
+1. Клонируем репу в папку `%APP_DIR%` (например */home/pi/maxreader*) `git clone https://github.com/alegorn-github/maximum.git %APP_DIR%`
 2. Прописываем автозапуск и автообновление сервера с указанием адреса сервера 1С `%SERVER_1S_URL_WITH_PORT%` (например *http://192.168.1.163:3003*):
     
     Запускаем `sudo nano /etc/rc.local`
