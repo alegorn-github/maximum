@@ -70,30 +70,59 @@ overflow: hidden;
 
 .number {
   position:absolute;
-  top:400px;
+  bottom:33%;
   display:block;
   width:100%;
-  font-size:70pt;
+  font-size:calc(35pt + 35 * (100vw - 800px) / 224);
   text-align:center;  
   color:white;
 }
 
 .message {
   position:absolute;
-  top:90px;
+  top:15%;
   display:block;
   width:100%;
-  font-size:70pt;
+  font-size:calc(35pt + 35 * (100vw - 800px) / 224);
   text-align:center;
   color:white;
 }
 
 .error {
   position:absolute;
-  top:300px;
+  bottom:20%;
   display:block;
   width:100%;
-  font-size:50pt;
+  font-size:calc(25pt + 25 * (100vw - 800px) / 224);
   text-align:center;  
   color:white;
+}
+
+@media (min-width:1024px){
+  .number {
+    font-size:70pt;
+  }
+  
+  .message {
+    font-size:70pt;
+  }
+  
+  .error {
+    font-size:50pt;
+  }
+}
+
+@media (max-width:800px){
+  .number {
+    font-size:35pt;
+  }
+  
+  .message {
+    font-size:35pt;
+  }
+  
+  .error {
+    font-size:25pt;
+  }
+  
 }
