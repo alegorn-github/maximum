@@ -50,21 +50,21 @@ const server = http.createServer((req, res) => {
         request(requestUrl, 
             reqConfig, 
             (perr, pres, pbody) => {
-            if (perr) { return console.log(perr); }
+                if (perr) { return console.log(perr); }
 
-            res.statusCode = pres.statusCode;
-            if (res.statusCode < 400){
-                res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(pbody));    
+                res.statusCode = pres.statusCode;
+                if (res.statusCode < 400){
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify(pbody));    
+                }
             }
-            else {
-                res.end(pbody);
-            }
-        });        
+        );        
     }
     else {
         const pathToFile = reqUrl.pathname === '/'? __dirname + '/index.html': __dirname +  reqUrl.pathname;
-        res.writeHead(200, { 'content-type': 'text/html' })
+        const contentType = reqUrl.pathname.search(/\.css$/) >= 0 ? "text/css" : "text/html";
+        console.log(contentType);
+        res.writeHead(200, { 'content-type': contentType })
         fs.createReadStream(pathToFile).pipe(res)
     }
 });
