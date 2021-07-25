@@ -27,7 +27,6 @@ body {
 overflow: hidden;
 }
 
-
 .message_animating {
   animation: message-resize 3s linear infinite;
 }

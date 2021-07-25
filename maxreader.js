@@ -31,33 +31,40 @@ const server = http.createServer((req, res) => {
     
     if (requestUrl){
         console.log(requestUrl);
-        request(requestUrl, { 
+        const reqConfig = { 
             json: true,
-            auth: {
+        };
+        if (serverUser && serverPass){
+            reqConfig.auth = {
                 user: serverUser,
                 pass: serverPass,
             }
-         }, (perr, pres, pbody) => {
-            if (perr) { return console.log(perr); }
+        }
+        request(requestUrl, 
+            reqConfig, 
+            (perr, pres, pbody) => {
+                if (perr) { return console.log(perr); }
 
-            res.statusCode = pres.statusCode;
-            if (res.statusCode < 400){
-                res.setHeader('Content-Type', 'application/json');
-                // if (getServerUrlFromCLI){
-                //     res.setHeader("Authorization", "Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
-                //     console.log("Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
-                // }
-            res.end(JSON.stringify(pbody));    
+                res.statusCode = pres.statusCode;
+                if (res.statusCode < 400){
+                    res.setHeader('Content-Type', 'application/json');
+                    // if (getServerUrlFromCLI){
+                    //     res.setHeader("Authorization", "Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
+                    //     console.log("Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
+                    // }
+                res.end(JSON.stringify(pbody));    
+                }
+                else {
+                    res.end(pbody);
+                }
             }
-            else {
-                res.end(pbody);
-            }
-        });        
+        );        
     }
     else {
         const pathToFile = reqUrl.pathname === '/'? __dirname + '/index.html': __dirname +  reqUrl.pathname;
-        reqUrl.pathname
-        res.writeHead(200, { 'content-type': 'text/html' })
+        const contentType = reqUrl.pathname.search(/\.css$/) >= 0 ? "text/css" : "text/html";
+        console.log(contentType);
+        res.writeHead(200, { 'content-type': contentType })
         fs.createReadStream(pathToFile).pipe(res)
     }
 });
