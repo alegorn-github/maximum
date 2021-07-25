@@ -56,6 +56,7 @@ const server = http.createServer((req, res) => {
     }
     else {
         const pathToFile = reqUrl.pathname === '/'? __dirname + '/index.html': __dirname +  reqUrl.pathname;
+        reqUrl.pathname
         res.writeHead(200, { 'content-type': 'text/html' })
         fs.createReadStream(pathToFile).pipe(res)
     }

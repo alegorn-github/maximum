@@ -5,46 +5,6 @@
 	<title>
 		Maximum
 	</title>
-	<style>
-        @keyframes message-resize {
-            0% {
-                transform: scale(1) translateY(0);
-            }
-
-            50% {
-                transform: scale(1.1) translateY(100px);
-            }
-
-            100% {
-                transform: scale(1) translateY(0);
-            }
-
-        }
-
-        @keyframes number-resize {
-            0% {
-                transform: scale(0.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-		body {
-			overflow: hidden;
-		}
-
-
-        .message_animating {
-            animation: message-resize 3s linear infinite;
-        }
-
-        .number_animating {
-            animation: number-resize 1s ease-out forwards;
-        }
-
-	</style>
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<script>
 		var MAXIMUM = { 
@@ -124,7 +84,7 @@
                 $('#number').clearQueue().stop();
 				if (MAXIMUM.State == MAXIMUM.States.lock) {
 					MAXIMUM.showNumber('');
-					 MAXIMUM.lockDownAnimation();
+					MAXIMUM.lockDownAnimation();
 				}
                 else if (MAXIMUM.State == MAXIMUM.States.unlock) {
                     MAXIMUM.cardUpAnimation();
@@ -188,24 +148,20 @@
 			}
 		};
 	</script>
+	<link rel="stylesheet" href="css\normalize.css">
+	<link rel="stylesheet" href="css\site.css">
 </head>
 <body>
 	<form>
-		<input type=text name=nfc_input id=nfc_input value='' style='z-index:-100;' /> 
+		<input class="nfc-input" type=text name=nfc_input id=nfc_input value="" /> 
 	</form>
-	<div style='position:absolute;display:block;top:0px;left:0px;background-color:black;width:100%;height:100%;'>
-		<div id="unlock_img" style="background-color:green;display:none;width:100%;height:100%;"></div>
-		<div id="wait_img" style="background-color:black;display:none;width:100%;height:100%;"></div>
-		<div id="lock_img" style="background-color:red;width:100%;height:100%;"></div>
-		<div id=number style='position:absolute;display:block;color:white;font-size:70pt;top:400px;width:100%;text-align:center;'>
-			
-		</div>
-		<div id=message style='position:absolute;display:block;color:white;font-size:70pt;top:90px;width:100%;text-align:center;'>
-
-		</div>
-		<p id=error style='position:absolute;display:block;color:white;font-size:50pt;top:300px;width:100%;text-align:center;'>
-
-		</p>
+	<div class="container">
+		<div class="background bg-green" id="unlock_img"></div>
+		<div class="background bg-black" id="wait_img"></div>
+		<div class="background bg-red" id="lock_img"></div>
+		<div class="number" id=number></div>
+		<div class="message" id=message></div>
+		<p class="error" id=error></p>
 		<div id='admin_div' style='display:none;'>
 			<div style='height:20px' id='cabin_template'></div>
 		</div>
