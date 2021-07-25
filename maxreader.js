@@ -35,7 +35,7 @@ const server = http.createServer((req, res) => {
     
     if (requestUrl){
         if (requestUrl.search(/^http:\/\//) < 0){
-            requestUrl += 'http://';
+            requestUrl = 'http://' + requestUrl;
         }
         console.log(requestUrl);
         const reqConfig = {
