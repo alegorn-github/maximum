@@ -148,6 +148,8 @@
 				else {
                     $('#error').html(message).removeClass('number_animating');
 				}
+				clearTimeout(MAXIMUM.myTimeout);
+				MAXIMUM.myTimeout = setTimeout(MAXIMUM.showError,MAXIMUM.lockTimeOut,'');
 			},
 			processResponse: function(data){
 				if (data.result = 'OK'){
