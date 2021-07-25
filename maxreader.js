@@ -24,29 +24,37 @@ const server = http.createServer((req, res) => {
 
     let requestUrl = reqUrl.searchParams.get('url');
     const getServerUrlFromCLI = reqUrl.searchParams.get('cli');
+    reqUrl.searchParams.delete('url');
+    reqUrl.searchParams.delete('cli');
     if (getServerUrlFromCLI){
-        let paramString = '?' + reqUrl.searchParams.toString();
-        requestUrl = serverUrl + paramString;
+        requestUrl = serverUrl + '?' + reqUrl.searchParams.toString();
+    }
+    else if (requestUrl) {
+        requestUrl += '&' + reqUrl.searchParams.toString();
     }
     
     if (requestUrl){
+        if (requestUrl.search(/^http:\/\//) < 0){
+            requestUrl += 'http://';
+        }
         console.log(requestUrl);
-        request(requestUrl, { 
+        const reqConfig = {
             json: true,
-            auth: {
+        }
+        if (serverUser){
+            reqConfig.auth = {
                 user: serverUser,
                 pass: serverPass,
             }
-         }, (perr, pres, pbody) => {
+        }
+        request(requestUrl, 
+            reqConfig, 
+            (perr, pres, pbody) => {
             if (perr) { return console.log(perr); }
 
             res.statusCode = pres.statusCode;
             if (res.statusCode < 400){
                 res.setHeader('Content-Type', 'application/json');
-                // if (getServerUrlFromCLI){
-                //     res.setHeader("Authorization", "Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
-                //     console.log("Basic " + Buffer.from(serverUser + ":" + serverPass).toString('base64'));
-                // }
             res.end(JSON.stringify(pbody));    
             }
             else {
