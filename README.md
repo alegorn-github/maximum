@@ -13,6 +13,10 @@
     ```
         sudo node %APP_DIR%/maxreader.js -s %SERVER_1S_URL_WITH_PORT% -u %USER_NAME% -p %USER_PASSWORD% &
     ```
+    В последней строчке должно стоять
+    ```
+        exit 0
+    ```
       
 3. Прописываем автозапуск браузера:
     Запускаем `sudo nano ~/.config/autostart/chromium.desktop` (при необходимости нужно создать директории с помощью `mkdir`)
