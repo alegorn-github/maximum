@@ -33,9 +33,6 @@
 					method: 'GET',
 					timeout: MAXIMUM.timeOut,
 					url: MAXIMUM.proxyAddress + MAXIMUM.serverAddress + '&number=' + cardNumber,
-                    headers: {
-						"Authorization": "Basic " + btoa(MAXIMUM.serverUser + ":" + MAXIMUM.serverPass),
-                    },
 					success:function(data){
 						MAXIMUM.processResponse(data);
 					},
