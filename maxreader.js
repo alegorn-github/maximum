@@ -7,13 +7,16 @@ const commander = require('commander');
 const hostname = 'localhost';
 const port = 3003;
 
+const os = require('os');
+const osHostname = os.hostname()||'localhost';
+
 commander.option('-s, --server <url>','Server 1S URL and port')
     .option('-u, --user <user>','Server 1S user name')
     .option('-p, --password <password>','Server 1S password')
 commander.parse(process.argv);
 const options = commander.opts();
 
-const serverUrl = options.server;
+const serverUrl = options.server||osHostname;
 const serverUser = options.user;
 const serverPass = options.password;
 
@@ -27,10 +30,10 @@ const server = http.createServer((req, res) => {
     reqUrl.searchParams.delete('url');
     reqUrl.searchParams.delete('cli');
     if (getServerUrlFromCLI){
-        requestUrl = serverUrl + '?' + reqUrl.searchParams.toString();
+        requestUrl = serverUrl + '?' + reqUrl.searchParams.toString() + '&hostname=' + osHostname;
     }
     else if (requestUrl) {
-        requestUrl += '&' + reqUrl.searchParams.toString();
+        requestUrl += '&' + reqUrl.searchParams.toString() + '&hostname=' + osHostname;
     }
     
     if (requestUrl){
